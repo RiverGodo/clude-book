@@ -10,18 +10,28 @@ Page({
     indicatorDots: true,
     indicatoractiveColor: "rgba(255,255,255,255)", 
     autoplay: true,
-    interval: 1000,
+    interval: 3000,
     duration: 1000,
+    isLoading: false
   },
   onLoad (){
     this.getData(),
     this.getContent()
+  
   },
   getData(){
+    this.setData({
+      isLoading: true
+    })
     fetch.get('/swiper').then(res =>{
      this.setData({
-       swiperData : res.data
+       swiperData : res.data,
+       isLoading: false
      })
+    }).catch(err=>{
+      this.setData({
+        isLoading: false
+      })
     })
   },
   getContent(){
@@ -37,6 +47,9 @@ Page({
     wx.navigateTo({
       url: `/pages/details/details?id=${id}`,
     })
-  }
+    // console.log(event.currentTarget.dataset.id)
+  
+  },
+
   
 })

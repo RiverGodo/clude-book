@@ -108,3 +108,55 @@ margin-top: 50rpx;
   color:#444;
   
 }
+
+.read-btn-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx;
+  box-shadow: 0 0 2px 2px rgba(0,0,0, .2);
+}
+
+.read-btn-wrap .b-btn {
+  background: #409eff;
+  color: #fff;
+  font-size: 12px;
+  margin: 0;
+}
+
+.catalog-menu{
+   position: fixed;
+   left: 30rpx;
+   top: 50rpx;
+   bottom: 50rpx;
+   right: 30rpx;
+   margin-left: 50rpx;
+   margin-bottom: 50rpx;
+   z-index: 996;
+   width: 600rpx;
+   height: 900rpx;
+   background-color: rgb(255, 255, 255);
+   
+
+}
+.catalog-menu .catalog-item{
+  font-size: 14px;
+  color: #333;
+  line-height: 70rpx;
+  height: 70rpx;
+  padding-left: 20rpx;
+
+}
+.catalog-menu .catalog-item:active{
+  background: #f1f1f1;
+}
+.mask{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 888;
+  background: rgba(0, 0, 0, 0.2);
+}
