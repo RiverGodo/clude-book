@@ -1,3 +1,4 @@
+
 <view class='details' >
 <image src='/static/img/loading.svg' class="loading" wx:if="{{isLoading}}"></image>
   <view class='book-details'>
@@ -31,9 +32,9 @@
       {{bookData.data.desc}}
     </view>
   </view>
-  <view class='book-catalog'>
+  <view class='book-catalog' bindtap="jumpTCatalog">
     <view class='catalog-l'>
-      <view class='show-catalog' bindtap="jumpTCatalog" >
+      <view class='show-catalog'  >
         查看目录
       </view>
       <view class='catalogs'>
@@ -43,16 +44,19 @@
     <view class='catalog-r updata-time'>
       更新于两天前>
     </view>
+    
   </view>
 
-
+  
   <view class='read-btn-wrap'>
     <button class="b-btn" bindtap="jumpCatalog">阅读该书籍</button>
   </view>
 
   <scroll-view scroll-y  class="catalog-menu" wx:if="{{isShow}}" catchtouchmove="true" >
 <scroll-view class='catalog-item' wx:for="{{catalog}}" wx:key="{{index}}" bindtap='handleGet' data-id="{{item._id}}">
-{{item.title}}
+   <navigator url="{{'/pages/book/book?id=' + item._id + '&bookId=' + bookId}}" class="link">
+      {{item.title}}
+    </navigator>
 </scroll-view>
 </scroll-view>
 <view class='mask'  wx:if="{{isShow}}" bindtap='jumpTCatalog'>

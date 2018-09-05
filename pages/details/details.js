@@ -26,14 +26,16 @@ Page({
     console.log(options)
     this.setData({bookId : options.id})
     this.getData()
+    this.getCatalog()
   },
+
 
   getData(){
     this.setData({
       isLoading: true
     })
     fetch.get(`/book/${this.data.bookId}`).then(res=>{
-      console.log(res)
+ 
       this.setData({
         bookData :res,
         isLoading: false
@@ -44,6 +46,33 @@ Page({
       })
     })
  
+  },
+  getDate() {
+    this.setData({
+      isLoading: true
+    })
+    fetch.get(`/article/${this.data.titleId}`)
+      .then(res => {
+        this.setData({
+          article: data,
+          title: res.data.title,
+          isLoading: false
+        })
+      }).catch(err => {
+        this.setData({
+          isLoading: false
+        })
+      })
+  },
+
+  getCatalog() {
+    fetch.get(`/titles/${this.data.bookId}`).then(res => {
+      console.log(res)
+      this.setData({
+        catalog: res.data
+      })
+
+    })
   },
 
  jumpCatalog(){
@@ -62,7 +91,7 @@ Page({
    * 用户点击右上角分享
    */
   handleGet(event) {
-
+    console.log(event)
     const id = event.currentTarget.dataset.id
     let isShow = !this.data.isShow
     this.setData({
@@ -73,6 +102,7 @@ Page({
     })
     this.getData()
   },
+
   onShareAppMessage: function () {
   
   }

@@ -16,7 +16,12 @@ Page({
     bookId: "",
     catalog:[],
     isShow:false,
-    isLoading: false
+    isLoading: false,
+    isScroll:false,
+    font:40,
+    index:'',
+ 
+  
   },
 
   /**
@@ -42,7 +47,8 @@ Page({
         this.setData({
           article: data,
           title: res.data.title,
-          isLoading: false
+          isLoading: false,
+          index:res.data.article.index,
         })
       }).catch(err => {
         this.setData({
@@ -80,7 +86,65 @@ Page({
     })
   this.getData()
   },
+  handleAdd(){
+    if (this.data.font >= 56) {
+      wx.showModal({
+        title: '提示',
+        content: '字体太大啦',
+        showCancel: false,
+      })
+    } else {
+      this.setData({
+        font: this.data.font + 2
+      })
+    }
+  },
+  handleRuduce(){
+    if(this.data.font<=30){
+      wx.showModal({
+        title: '提示',
+        content:'字体太小影响视力哦',
+        showCancel:false,
+      })
+    }else{
+      this.setData({
+        font: this.data.font - 2
+      })
+    }
 
+  },
+  handleNext(){
+    let catalog = this.data.catalog
+    if (catalog[this.data.index + 1]){
+      this.setData({
+        titleId: catalog[this.data.index + 1]._id
+      })
+      this.getData()
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '已经是最后一章了',
+        showCancel: false,
+      })
+    }
+
+  },
+  handlePrev(){
+    let catalog = this.data.catalog
+    if(this.data.index-1<0){
+      wx.showModal({
+        title: '提示',
+        content: '已经是第一章了',
+        showCancel: false,
+      })
+    }else{
+      this.setData({
+        titleId: catalog[this.data.index - 1]._id
+      })
+      this.getData()
+    }
+
+  },
 
   onShareAppMessage: function () {
   
