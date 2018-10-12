@@ -1,0 +1,43 @@
+<view class='myself'>
+  <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 请登录 </button>
+  <block wx:else>
+<view class='message'>
+    <view class='main-message'>
+      <view class='head'>
+        <image class='cycle' src="{{userInfo.avatarUrl}}" mode="cover" ></image>
+      </view>
+      <view class='text'>
+        <view class='name'>
+          <text>{{userInfo.nickName}}</text>
+        </view>
+        <view class='lazy'>
+          <text>这家伙很懒，什么也没留下</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  </block>
+ 
+  
+  <view class='fuction'>
+
+    <view class='coin-number'>
+      <text>5</text>
+    </view>
+    <view class='coin'>
+      <text>收藏</text>
+    </view>
+
+    <view class='fuc-number'>
+      <text>4</text>
+    </view>
+    <view class='fuc'>
+      <text>关注</text>
+    </view>
+
+  </view>
+
+  <view class='bac-img'>
+    <image src='../../static/img/baccat.jpg'></image>
+  </view>
+</view>

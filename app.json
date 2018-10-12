@@ -3,12 +3,41 @@
     "pages/index/index",
     "pages/details/details",
     "pages/catalog/catalog",
-    "pages/book/book"
+    "pages/book/book",
+    "pages/study/study",
+    "pages/myself/myself"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "天天云书",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+
+    "color":"#373737",
+    "selectedColor":"#1296db",
+    "borderStyle": "#f0f0f0",
+    "backgroundColor": "#fffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath":"static/img/main-i-page.png",
+        "selectedIconPath":"static/img/main-page.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/study/study",
+                "iconPath": "static/img/book.png",
+                "selectedIconPath": "static/img/book1.png",
+        "text": "我的学习"
+      },
+      {
+        "pagePath": "pages/myself/myself",
+                "iconPath": "static/img/myself.png",
+                "selectedIconPath": "static/img/myself1.png",
+        "text": "个人中心"
+      }
+    ]
   }
 }

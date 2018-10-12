@@ -15,10 +15,13 @@ Page({
     isLoading: false,
     pn:1,
     hasMore:true,
-    loadDone:false
+    loadDone:false,
+    mainMnue:false,
+
   },
   onLoad (){
     login()
+    
     Promise.all([this.getData(), this.getContent()]).then(() => {
       this.setData({
         hasMore: true,
@@ -27,7 +30,7 @@ Page({
       })
  
     })
-  
+   
   },
   getData(){//获取轮播图
   return new Promise((resolve,reject)=>{
@@ -61,6 +64,7 @@ Page({
         mainContent: res.data,
         isLoading:false
       })
+     
     })
   })
   },
@@ -81,8 +85,7 @@ Page({
     wx.navigateTo({
       url: `/pages/details/details?id=${id}`,
     })
-    // console.log(event.currentTarget.dataset.id)
-  
+    
   },
 
   onPullDownRefresh(){
@@ -110,5 +113,4 @@ Page({
     }
  
   },
-  
 })

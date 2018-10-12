@@ -1,0 +1,5 @@
+<!--pages/study/study.wxml-->
+<view wx:for="{{saveData}}" wx:key="{{index}}">
+<view>{{item.title}}</view>
+<view><image src="{{item.img}}" class='img'></image></view>
+</view>

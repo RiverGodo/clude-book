@@ -20,7 +20,7 @@
       </view>
     </view>
     <view class='book-b'>
-      <button class='btn'>收藏</button>
+      <button class='btn' bindtap='hideBook'> <text class="saveText">{{isClick?'已收藏':'收藏'}}</text></button>
       <button class='btn'>分享好友</button>
     </view>
   </view>

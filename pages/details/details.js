@@ -1,6 +1,7 @@
 // pages/details.js
 
 import {fetch} from "../../utils/util.js" 
+const app = getApp();
 
 Page({
 
@@ -16,14 +17,18 @@ Page({
     article: {},
     title: "",
     catalog: [],
-
+    token:"",
+    hidden:true,
+    isClick:true,
+    img:{},
+    hideData:[],
+    index:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.setData({bookId : options.id})
     this.getData()
     this.getCatalog()
@@ -35,11 +40,13 @@ Page({
       isLoading: true
     })
     fetch.get(`/book/${this.data.bookId}`).then(res=>{
- 
+
       this.setData({
+        
         bookData :res,
         isLoading: false
       })
+
     }).catch(err => {
       this.setData({
         isLoading: false
@@ -53,6 +60,7 @@ Page({
     })
     fetch.get(`/article/${this.data.titleId}`)
       .then(res => {
+        console.log(res)
         this.setData({
           article: data,
           title: res.data.title,
@@ -67,7 +75,6 @@ Page({
 
   getCatalog() {
     fetch.get(`/titles/${this.data.bookId}`).then(res => {
-      console.log(res)
       this.setData({
         catalog: res.data
       })
@@ -84,6 +91,34 @@ Page({
     let isShow = !this.data.isShow
     this.setData({
       isShow
+    })
+  },
+  hideBook(e){
+    fetch.get(`/book/${this.data.bookId}`).then(res => {
+      console.log(res)
+      if (!this.data.isClick == true) {   
+        console.log(this.data.hideData)
+        let hideData = this.data.hideData
+        hideData.push({
+          bookId:res.data._id,
+          title: res.data.title,
+          img: res.data.img,
+          index: res.data.index
+        })
+        console.log(this.data.hideData)
+        wx.setStorageSync("hideData", hideData);
+        wx.showToast({
+          title: '已收藏',
+        });
+
+      } else {
+        wx.showToast({
+          title: '已取消收藏',
+        });
+      }
+      this.setData({
+        isClick: !this.data.isClick
+      })
     })
   },
  
@@ -104,6 +139,11 @@ Page({
   },
 
   onShareAppMessage: function () {
-  
+    return{
+      title:this.data.bookData.data.title,
+      path:`/pages/details/details?id=${this.data.bookId}`,
+      imageUrl: this.data.bookData.data.img
+
+    }
   }
 })

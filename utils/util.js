@@ -3,16 +3,13 @@ const baseUrl = "https://m.yaojunrong.com"
 const fetch = {
   http(url, method, data){
     return new Promise((resolve,reject)=>{
-     let token = wx.setStorageSync('token')
-
-      let header ={
-        
+     let token = wx.getStorageSync('token')
+      let header = {
         'content-type': "application/json"
-      
       }
       if(token){
-        header.token = token
-      }
+       header.token = token
+      } 
 
       wx.request({
         url: baseUrl + url,
@@ -20,10 +17,12 @@ const fetch = {
         method,
         header,
         success(res) {
-          console.log(res)
+      
           if(res.header.Token){
             wx.setStorageSync('token', res.header.Token)
+     
           }
+          // console.log(res.header.Token)
           resolve(res.data)
         },
         fail(err) {
@@ -44,7 +43,6 @@ const fetch = {
 const login = ()=>{
   wx.login({
     success(res){
-
       fetch.post('/login',{
         code:res.code,
         appid:"wx24aaa4dd5c1f62a6",
